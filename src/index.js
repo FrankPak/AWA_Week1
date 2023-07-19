@@ -9,10 +9,12 @@ if (document.readyState !== "loading") {
 }
 
 async function initializeCode() {
-  let dogBreeds = ["Borzoi", "Beagle", "GermanShepherd", "Dingo", "Corgi"] //HAs to be lowercase toLowerCase()
-  document.getElementById("app").innerHTML = "<h1>Hello!</h1>";
+  let dogBreeds = ["Borzoi", "Beagle", "GermanShepherd", "Dingo", "Corgi"]; //HAs to be lowercase toLowerCase()
   for (let i = 0; i < dogBreeds.length; i++) {
-    let url ="https://dog.ceo/api/breed/" + dogBreeds[i].toLowerCase()+"/images/random"
+    let url =
+      "https://dog.ceo/api/breed/" +
+      dogBreeds[i].toLowerCase() +
+      "/images/random";
     let breedData = await fetch(url);
     let breedImg = await breedData.json();
     createWiki(dogBreeds[i], breedImg.message);
