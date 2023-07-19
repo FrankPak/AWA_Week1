@@ -8,14 +8,18 @@ if (document.readyState !== "loading") {
   });
 }
 
-function initializeCode() {
+async function initializeCode() {
+  let dogBreeds = ["Borzoi", "Beagle", "GermanShepherd", "Dingo", "Corgi"] //HAs to be lowercase toLowerCase()
   document.getElementById("app").innerHTML = "<h1>Hello!</h1>";
-  for (let i = 0; i < 5; i++) {
-    createWiki();
+  for (let i = 0; i < dogBreeds.length; i++) {
+    let url ="https://dog.ceo/api/breed/" + dogBreeds[i].toLowerCase()+"/images/random"
+    let breedData = await fetch(url);
+    let breedImg = await breedData.json();
+    createWiki(dogBreeds[i], breedImg.message);
   }
 }
 
-function createWiki() {
+function createWiki(breed, breedImg) {
   let divItem = document.createElement("div");
   let header = document.createElement("h1");
   let divContent = document.createElement("div");
@@ -29,9 +33,9 @@ function createWiki() {
   pText.setAttribute("class", "wiki-text");
   imgContainer.setAttribute("class", "img-container");
   imgWiki.setAttribute("class", "wiki-img");
-  imgWiki.setAttribute("src", "");
+  imgWiki.setAttribute("src", breedImg);
 
-  header.innerHTML = "Breed x";
+  header.innerHTML = breed;
   pText.innerHTML = "Some text about this breed.";
 
   divItem.appendChild(header);
