@@ -9,7 +9,7 @@ if (document.readyState !== "loading") {
 }
 
 async function initializeCode() {
-  let dogBreeds = ["Borzoi", "Beagle", "GermanShepherd", "Dingo", "Corgi"]; //HAs to be lowercase toLowerCase()
+  let dogBreeds = ["Borzoi", "Beagle", "Akita", "Dingo", "Corgi"]; //HAs to be lowercase toLowerCase()
   for (let i = 0; i < dogBreeds.length; i++) {
     let url =
       "https://dog.ceo/api/breed/" +
@@ -17,11 +17,16 @@ async function initializeCode() {
       "/images/random";
     let breedData = await fetch(url);
     let breedImg = await breedData.json();
-    createWiki(dogBreeds[i], breedImg.message);
+
+    let wikiUrl = "https://en.wikipedia.org/api/rest_v1/page/summary/" + dogBreeds[i].toLowerCase();
+    let wikiData = await fetch(wikiUrl);
+    let wikiJson = await wikiData.json();
+
+    createWiki(dogBreeds[i],breedImg.message, wikiJson.extract);
   }
 }
 
-function createWiki(breed, breedImg) {
+function createWiki(breed, breedImg, summary) {
   let divItem = document.createElement("div");
   let header = document.createElement("h1");
   let divContent = document.createElement("div");
@@ -38,7 +43,7 @@ function createWiki(breed, breedImg) {
   imgWiki.setAttribute("src", breedImg);
 
   header.innerHTML = breed;
-  pText.innerHTML = "Some text about this breed.";
+  pText.innerHTML = summary;
 
   divItem.appendChild(header);
   divItem.appendChild(divContent);
