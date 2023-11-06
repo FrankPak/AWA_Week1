@@ -1,5 +1,3 @@
-import "./styles.css";
-
 if (document.readyState !== "loading") {
   initializeCode();
 } else {
@@ -18,11 +16,13 @@ async function initializeCode() {
     let breedData = await fetch(url);
     let breedImg = await breedData.json();
 
-    let wikiUrl = "https://en.wikipedia.org/api/rest_v1/page/summary/" + dogBreeds[i].toLowerCase();
+    let wikiUrl =
+      "https://en.wikipedia.org/api/rest_v1/page/summary/" +
+      dogBreeds[i].toLowerCase();
     let wikiData = await fetch(wikiUrl);
     let wikiJson = await wikiData.json();
 
-    createWiki(dogBreeds[i],breedImg.message, wikiJson.extract);
+    createWiki(dogBreeds[i], breedImg.message, wikiJson.extract);
   }
 }
 
