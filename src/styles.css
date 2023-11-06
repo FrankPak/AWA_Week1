@@ -1,15 +1,12 @@
-body {
-  font-family: sans-serif;
-}
+
 .wiki-item {
   margin-right: 10px;
   margin-left:  10px;
   box-shadow: 10px 5px 5px gray;
-  
 }
+
 .wiki-content{
   padding: 10px 25px 10px 10px;
-
 }
 
 .wiki-img {
@@ -26,10 +23,12 @@ body {
     display: flex;
     flex-flow: row-reverse;
   }
+
   .wiki-text {
     min-width: 50%;
     max-width: 50%;
   }
+
   .img-container {
     min-width: 50%;
     max-width: 50%;
